@@ -1,0 +1,148 @@
+.fp-nav {
+  position: fixed;
+  z-index: 200;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.fp-nav.right {
+  right: 22px;
+}
+
+.fp-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fp-nav ul li {
+  display: block;
+  box-sizing: content-box;
+  position: relative;
+  cursor: pointer;
+}
+
+.fp-nav ul li a {
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 15px 17px;
+}
+
+.fp-nav ul li a span {
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  height: 6px;
+  width: 6px;
+  box-shadow: inset 0 0 0 8px rgba(0, 0, 0, 0.3);
+  left: 50%;
+  top: 50%;
+  display: block;
+  margin: -3px 0 0 -3px;
+  transition: transform 0.1s ease-in-out, box-shadow 0.25s ease-out;
+}
+
+.fp-nav ul li a.active span {
+  height: 12px;
+  width: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 100%;
+  background-color: transparent;
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.6);
+}
+
+.fp-nav ul li:hover a span {
+  animation: dotHoverBounce 0.35s ease-in-out;
+}
+
+@keyframes dotHoverBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Light controls for dark backgrounds */
+.fp-nav.light-controls ul li a span {
+  box-shadow: inset 0 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+.fp-nav.light-controls ul li a.active span {
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Tooltips */
+.fp-tooltip {
+  opacity: 0;
+  position: absolute;
+  right: 50px;
+  top: 0;
+  height: 34px;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  overflow: hidden;
+}
+
+.fp-tooltip .tooltip-inner {
+  position: absolute;
+  top: -3px;
+  right: 0;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  font-family: var(--font-body);
+  line-height: 36px;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translateX(-10px);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.fp-tooltip .tooltip-inner span {
+  opacity: 0;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 1, 0.44);
+}
+
+.fp-nav ul li:hover .fp-tooltip {
+  opacity: 1;
+}
+
+.fp-nav ul li:hover .fp-tooltip .tooltip-inner span {
+  opacity: 1;
+  transition: opacity 0.2s cubic-bezier(0, 0.44, 0.41, 0.99);
+}
+
+.fp-tooltip .tooltip-inner::after {
+  width: 100%;
+  height: 1px;
+  display: block;
+  content: '';
+  right: -100%;
+  opacity: 1;
+  top: 50%;
+  margin-right: -10px;
+  position: absolute;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  transform: translateY(-50%);
+}
+
+.fp-nav.light-controls .fp-tooltip .tooltip-inner {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.fp-nav.light-controls .fp-tooltip .tooltip-inner::after {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+  .fp-nav.right {
+    right: 12px;
+  }
+
+  .fp-tooltip {
+    display: none;
+  }
+}

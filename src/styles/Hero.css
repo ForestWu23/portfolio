@@ -1,0 +1,151 @@
+.hero {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 40px;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.hero-hello-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-squiggle {
+  position: absolute;
+  left: 0;
+  bottom: -30%;
+  width: 100%;
+  height: 50%;
+  z-index: -1;
+}
+
+.hero-squiggle-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  stroke-linecap: round;
+}
+
+.hero-squiggle-animate .hero-squiggle-path {
+  animation: nectarStrokeAnimation 1.8s cubic-bezier(0.25, 0.1, 0.18, 1) 0.6s forwards;
+}
+
+@keyframes nectarStrokeAnimation {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+.hero-subtitle {
+  font-size: clamp(0.82rem, 1.2vw, 0.92rem);
+  color: var(--color-text-secondary);
+  max-width: 500px;
+  margin-top: 36px;
+  line-height: 1.75;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 42px;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 16px 36px;
+  border-radius: 100px;
+  transition: var(--transition-base);
+  letter-spacing: 0.01em;
+}
+
+.hero-btn-primary {
+  background: var(--color-accent);
+  color: var(--color-bg-dark);
+}
+
+.hero-btn-primary:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(196, 255, 35, 0.3);
+}
+
+.hero-btn-secondary {
+  background: transparent;
+  color: var(--color-text);
+  border: 1.5px solid rgba(0, 0, 0, 0.75);
+}
+
+.hero-btn-secondary:hover {
+  background: #242424;
+  color: #ffffff;
+  border-color: #242424;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 0 24px;
+  }
+
+  .hero-title {
+    white-space: normal;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    margin-top: 32px;
+  }
+
+  .hero-btn {
+    width: 100%;
+    max-width: 220px;
+  }
+}
