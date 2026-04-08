@@ -26,14 +26,13 @@ const highlights = [
   {
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 00-3-3.87" />
-        <path d="M16 3.13a4 4 0 010 7.75" />
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+        <line x1="14" y1="4" x2="10" y2="20" />
       </svg>
     ),
-    title: 'Product Strategy',
-    desc: 'Bridging user research insights with business goals to define product roadmaps, validate concepts, and drive measurable growth outcomes through thoughtful design decisions.',
+    title: 'AI Coding',
+    desc: 'Fluent in HTML, CSS, and JavaScript — I use AI-powered tools to rapidly build and ship production-ready websites, turning design concepts into live, responsive experiences.',
   },
 ]
 

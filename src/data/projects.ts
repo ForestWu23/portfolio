@@ -2,53 +2,72 @@ export interface Project {
   id: string
   title: string
   subtitle: string
-  categories: string[]
-  thumbnail?: string
+  thumbnail: string
+  comingSoon?: boolean
 }
-
-export const categories = [
-  'All',
-  'UX/UI',
-  'Branding',
-  'Interactive',
-  'Visual Design',
-]
 
 export const projects: Project[] = [
   {
-    id: 'project-1',
-    title: 'VelvetY Brand System',
-    subtitle: 'Branding & Visual Identity',
-    categories: ['Branding', 'Visual Design'],
+    id: 'buyerfolio',
+    title: 'BuyerFolio',
+    subtitle: 'Mobile Product Design For the Home-Selling Journey',
+    thumbnail: 'images/KindleCoverPage.png',
   },
   {
-    id: 'project-2',
-    title: 'BuyerFolio AI Platform',
-    subtitle: 'Product UX Design',
-    categories: ['UX/UI'],
+    id: 'kindle',
+    title: 'Kindle',
+    subtitle: 'Mobile Product Redesign For Digital Reading',
+    thumbnail: 'images/KindleCoverPage.png',
   },
   {
-    id: 'project-3',
-    title: 'Thrive Freeze Dry',
-    subtitle: 'E-commerce & Brand Design',
-    categories: ['UX/UI', 'Branding'],
+    id: 'green-apple',
+    title: 'Green Apple Art Center',
+    subtitle: 'Website Redesign For an Art Education Platform',
+    thumbnail: 'images/KindleCoverPage.png',
   },
   {
-    id: 'project-4',
-    title: 'Eastside Builders Group',
-    subtitle: 'Web Design & Development',
-    categories: ['UX/UI', 'Interactive'],
+    id: 'micro-ingredients',
+    title: 'Micro Ingredients',
+    subtitle: 'Amazon Landing Page For Conversion and Brand Storytelling',
+    thumbnail: 'images/KindleCoverPage.png',
   },
   {
-    id: 'project-5',
-    title: 'Import National',
-    subtitle: 'Visual Identity & Collateral',
-    categories: ['Branding', 'Visual Design'],
+    id: 'huagen',
+    title: 'Huagen Culture Center',
+    subtitle: 'Brand System and Website Design For a Cultural Organization',
+    thumbnail: 'images/KindleCoverPage.png',
   },
   {
-    id: 'project-6',
-    title: 'Interactive Campaign',
-    subtitle: 'Motion Design & Interactive Media',
-    categories: ['Interactive', 'Visual Design'],
+    id: 'velvety',
+    title: 'Velvety Design',
+    subtitle: 'Website Design For a Creative Design Studio',
+    thumbnail: 'images/KindleCoverPage.png',
+  },
+  {
+    id: 'nutribites',
+    title: 'NutriBites',
+    subtitle: 'Website Design For a Pet Nutrition Brand',
+    thumbnail: 'images/KindleCoverPage.png',
+  },
+  {
+    id: 'solara',
+    title: 'Solara Wellness',
+    subtitle: 'Brand Identity and App Design For a Wellness Platform',
+    thumbnail: '',
+    comingSoon: true,
+  },
+  {
+    id: 'nova-finance',
+    title: 'Nova Finance',
+    subtitle: 'Dashboard Design For Personal Finance Management',
+    thumbnail: '',
+    comingSoon: true,
+  },
+  {
+    id: 'wanderlust',
+    title: 'Wanderlust',
+    subtitle: 'Mobile Experience Design For Travel Discovery',
+    thumbnail: '',
+    comingSoon: true,
   },
 ]

@@ -12,7 +12,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ currentIndex, goToSection }: NavbarProps) {
-  const isDark = currentIndex >= 1 && currentIndex <= 2
+  const isDark = (currentIndex >= 1 && currentIndex <= 2) || currentIndex === 4
 
   return (
     <nav className={`navbar ${isDark ? 'navbar-dark' : ''}`}>

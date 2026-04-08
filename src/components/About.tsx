@@ -2,15 +2,18 @@ import { motion } from 'framer-motion'
 import AnimatedGradient from './AnimatedGradient'
 import '../styles/About.css'
 
-const specializations = [
-  'UIUX Design',
+const specsLeft = [
+  'Product Design',
   'Interaction Design',
-  'Branding',
+  'User Flows',
   'User Research',
-  'Product Strategy',
-  'Visual Storytelling',
+]
+
+const specsRight = [
+  'Front-end Development',
+  'Prototyping',
   'Design Systems',
-  'Interactive Media',
+  'AI Coding',
 ]
 
 interface AboutProps {
@@ -26,23 +29,12 @@ export default function About({ isActive }: AboutProps) {
 
       <div className="about-inner">
         <div className="about-photo">
-          <div className="about-photo-placeholder">
-            <svg
-              width="64"
-              height="64"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="0.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <circle cx="8.5" cy="8.5" r="1.5" />
-              <path d="M21 15l-5-5L5 21" />
-            </svg>
-            <span>Photo</span>
-          </div>
+          <img
+            src={import.meta.env.BASE_URL + 'images/aboutphoto.jpg'}
+            alt="Sihang Yang"
+            className="about-photo-img"
+          />
+          <div className="about-photo-fade" />
         </div>
 
         <motion.div
@@ -58,32 +50,34 @@ export default function About({ isActive }: AboutProps) {
           </h2>
 
           <p className="about-text">
-            I'm Sihang Yang, an Interactive, UI/UX, and Graphic Designer
-            driven by both logic and emotion. With experience spanning digital
-            media, branding, and spatial design, I craft user-centered
-            experiences that balance form, function, and sustainability.
+            I'm Sihang Yang, a UI/UX and visual designer with a front-end
+            engineer's mindset. I don't just design interfaces, I bring them
+            to life, from first wireframe to live site.
           </p>
 
           <p className="about-text">
-            My design philosophy blends purity and practicality: every visual
-            decision serves purpose, every interface tells a story. From
-            intuitive product flows to visually refined identities, I aim to
-            create work that endures — aesthetically, emotionally, and
-            ethically.
+            My approach is simple: clarity first, emotion always. Every
+            decision has a reason, but the experience should feel effortless.
           </p>
 
           <p className="about-text">
-            When I'm not designing, you'll find me snowboarding down fresh
-            powder or serving aces on the tennis court, always chasing balance
-            between motion, mindfulness, and creativity.
+            When I'm not behind a screen, I'm probably chasing speed, on a
+            snowboard or a tennis court.
           </p>
 
-          <p className="about-specs-label">Specialization &amp; Accomplishments</p>
-          <ul className="about-specs">
-            {specializations.map((spec) => (
-              <li key={spec}>{spec}</li>
-            ))}
-          </ul>
+          <p className="about-specs-label">Specialization</p>
+          <div className="about-specs-grid">
+            <ul className="about-specs-col">
+              {specsLeft.map((spec) => (
+                <li key={spec}>{spec}</li>
+              ))}
+            </ul>
+            <ul className="about-specs-col">
+              {specsRight.map((spec) => (
+                <li key={spec}>{spec}</li>
+              ))}
+            </ul>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -24,12 +24,21 @@ const twistVariants = {
   },
 }
 
-const fadeUpVariants = {
+const subtitleVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.9, delay: 2, ease: [0.16, 1, 0.3, 1] },
+  },
+}
+
+const actionsVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, delay: 2.4, ease: [0.16, 1, 0.3, 1] },
   },
 }
 
@@ -73,22 +82,20 @@ export default function Hero({ goToSection, isActive }: HeroProps) {
 
         <motion.p
           className="hero-subtitle"
-          variants={fadeUpVariants}
+          variants={subtitleVariants}
           initial="hidden"
           animate={isActive ? 'visible' : 'hidden'}
-          transition={{ delay: 0.25 }}
         >
           I craft user-centered digital experiences that merge strategy,
-          creativity, and functionality — helping brands grow through
+          creativity, and functionality, helping brands grow through
           thoughtful design and measurable results.
         </motion.p>
 
         <motion.div
           className="hero-actions"
-          variants={fadeUpVariants}
+          variants={actionsVariants}
           initial="hidden"
           animate={isActive ? 'visible' : 'hidden'}
-          transition={{ delay: 0.45 }}
         >
           <button className="hero-btn hero-btn-primary" onClick={() => goToSection(2)}>
             View work

@@ -36,9 +36,15 @@ export default function App() {
     const targetSlide = slidesRef.current[targetIndex]
     if (!currentSlide || !targetSlide) return
 
+    slidesRef.current.forEach((slide, i) => {
+      if (!slide || i === currentIndex || i === targetIndex) return
+      slide.style.visibility = 'hidden'
+    })
+
     targetSlide.style.transition = 'none'
     targetSlide.style.transform = `translateY(${direction * 100}%)`
     targetSlide.style.opacity = '1'
+    targetSlide.style.visibility = 'visible'
     targetSlide.style.zIndex = '10'
     currentSlide.style.zIndex = '5'
 
@@ -56,6 +62,7 @@ export default function App() {
           slidesRef.current.forEach((slide, i) => {
             if (!slide) return
             slide.style.transition = 'none'
+            slide.style.visibility = 'visible'
             if (i === targetIndex) {
               slide.style.transform = 'translateY(0%) scale(1)'
               slide.style.opacity = '1'
