@@ -184,7 +184,7 @@ export default function BuilderProject() {
             <h2 className="text-5xl serif font-700 mb-6 scroll-reveal tracking-tight">
               From <span className="accent">Template</span> to Immersive.
             </h2>
-            <p className="pull-quote text-gray-400 max-w-2xl scroll-reveal">
+            <p className="text-sm text-gray-400 max-w-xl leading-relaxed scroll-reveal">
               This wasn&apos;t just a visual redesign — it was a ground-up
               rethinking of how a builder&apos;s story unfolds through scroll-driven
               interaction. Every design decision was backed by a deliberate
@@ -253,7 +253,7 @@ export default function BuilderProject() {
             <h3 className="text-4xl serif font-700 mb-3 scroll-reveal tracking-tight">
               A Front-End <span className="accent">Engineer&apos;s</span> Mindset,<br />Not Just a Designer&apos;s Eye.
             </h3>
-            <p className="text-xs text-gray-400 max-w-xl mb-14 scroll-reveal leading-relaxed">
+            <p className="text-sm text-gray-400 max-w-xl mb-14 scroll-reveal leading-relaxed">
               Every visual technique required deliberate engineering — from CSS
               architecture and compositing layers to animation performance and
               scroll physics.
@@ -328,7 +328,7 @@ export default function BuilderProject() {
 
       {/* Window 5 — Results (moved before the closing quote) */}
       <div className="window-section stack-gap">
-        <div className="fixed-bg bg-color-5" style={{ backgroundImage: `url(${BASE}images/builder/villa2.jpg)` }} />
+        <div className="fixed-bg bg-color-5" style={{ backgroundImage: `url(${BASE}images/builder/pool.jpg)` }} />
         <div className="glass-overlay" />
         <div className="content-layer items-center text-center">
           <p className="text-[10px] tracking-[0.4em] uppercase opacity-40 mb-8">Impact</p>
@@ -358,7 +358,7 @@ export default function BuilderProject() {
 
       {/* Window 6 — Closing Quote + Back to Portfolio (LAST window before footer) */}
       <div className="window-section stack-gap">
-        <div className="fixed-bg bg-color-6" style={{ backgroundImage: `url(${BASE}images/builder/pool.jpg)` }} />
+        <div className="fixed-bg bg-color-6" style={{ backgroundImage: `url(${BASE}images/builder/villa2.jpg)` }} />
         <div className="glass-overlay" />
         <div className="content-layer items-center text-center">
           <h2 className="text-7xl serif font-800 mb-8 tracking-tight leading-none max-w-4xl">

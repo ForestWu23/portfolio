@@ -98,16 +98,6 @@
   margin-bottom: 12px;
 }
 
-/* Pull quote styling */
-.pull-quote {
-  font-family: 'League Spartan', sans-serif;
-  font-size: clamp(1rem, 2vw, 1.35rem);
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: -0.01em;
-  font-style: italic;
-}
-
 /* Footer wrapper for builder page */
 .builder-footer-wrap {
   position: relative;
