@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
+import { useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Highlights from './components/Highlights'
@@ -80,20 +81,31 @@ export default function App() {
     })
   }, [currentIndex])
 
+  const location = useLocation()
+
   useEffect(() => {
+    const target = (location.state as { targetSection?: number } | null)?.targetSection
+    const initialIndex = target != null ? target : 0
+
     slidesRef.current.forEach((slide, i) => {
       if (!slide) return
       slide.style.transition = 'none'
-      if (i === 0) {
+      if (i === initialIndex) {
         slide.style.transform = 'translateY(0%) scale(1)'
         slide.style.opacity = '1'
         slide.style.zIndex = '10'
       } else {
-        slide.style.transform = 'translateY(100%)'
+        slide.style.transform = i > initialIndex ? 'translateY(100%)' : 'translateY(-100%)'
         slide.style.opacity = '1'
         slide.style.zIndex = '1'
       }
     })
+
+    if (target != null) {
+      setCurrentIndex(target)
+      window.history.replaceState({}, document.title)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

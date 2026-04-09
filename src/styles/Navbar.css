@@ -54,6 +54,15 @@
   color: var(--color-text-inverse);
 }
 
+.navbar-blend {
+  mix-blend-mode: difference;
+}
+
+.navbar-blend .navbar-logo,
+.navbar-blend .navbar-link {
+  color: #fff;
+}
+
 @media (max-width: 768px) {
   .navbar {
     top: 50px;

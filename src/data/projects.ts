@@ -3,10 +3,18 @@ export interface Project {
   title: string
   subtitle: string
   thumbnail: string
+  detailPath?: string
   comingSoon?: boolean
 }
 
 export const projects: Project[] = [
+  {
+    id: 'ridgeline-homes',
+    title: 'Ridgeline Homes',
+    subtitle: 'Immersive Web Design For Modern Construction',
+    thumbnail: 'images/builder/pool.jpg',
+    detailPath: '/projects/builder',
+  },
   {
     id: 'buyerfolio',
     title: 'BuyerFolio',
@@ -60,13 +68,6 @@ export const projects: Project[] = [
     id: 'nova-finance',
     title: 'Nova Finance',
     subtitle: 'Dashboard Design For Personal Finance Management',
-    thumbnail: '',
-    comingSoon: true,
-  },
-  {
-    id: 'wanderlust',
-    title: 'Wanderlust',
-    subtitle: 'Mobile Experience Design For Travel Discovery',
     thumbnail: '',
     comingSoon: true,
   },

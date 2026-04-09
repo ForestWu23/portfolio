@@ -1,4 +1,5 @@
 import { useRef, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { projects } from '../data/projects'
 import '../styles/Projects.css'
@@ -12,6 +13,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
   const cardRef = useRef<HTMLDivElement>(null)
   const imgRef = useRef<HTMLImageElement>(null)
   const rafRef = useRef<number>(0)
+  const navigate = useNavigate()
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     cancelAnimationFrame(rafRef.current)
@@ -50,6 +52,12 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
     }
   }, [])
 
+  const handleClick = useCallback(() => {
+    if (project.detailPath) {
+      navigate(project.detailPath)
+    }
+  }, [project.detailPath, navigate])
+
   return (
     <motion.div
       className="project-card"
@@ -63,6 +71,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
     >
       <div className="project-card-thumbnail">
         {project.thumbnail ? (

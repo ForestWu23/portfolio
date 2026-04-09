@@ -108,3 +108,10 @@ ul, ol {
     clip-path: inset(50px 24px 24px 24px round 20px);
   }
 }
+
+html.scrollable-page,
+html.scrollable-page body,
+html.scrollable-page #root {
+  overflow: auto;
+  height: auto;
+}

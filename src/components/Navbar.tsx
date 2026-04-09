@@ -7,15 +7,16 @@ const navLinks = [
 ]
 
 interface NavbarProps {
-  currentIndex: number
+  currentIndex?: number
   goToSection: (index: number) => void
+  blendMode?: boolean
 }
 
-export default function Navbar({ currentIndex, goToSection }: NavbarProps) {
-  const isDark = (currentIndex >= 1 && currentIndex <= 2) || currentIndex === 4
+export default function Navbar({ currentIndex = 0, goToSection, blendMode }: NavbarProps) {
+  const isDark = blendMode || (currentIndex >= 1 && currentIndex <= 2) || currentIndex === 4
 
   return (
-    <nav className={`navbar ${isDark ? 'navbar-dark' : ''}`}>
+    <nav className={`navbar ${isDark ? 'navbar-dark' : ''} ${blendMode ? 'navbar-blend' : ''}`}>
       <a
         className="navbar-logo"
         href="#"
