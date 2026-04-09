@@ -1,0 +1,10 @@
+---
+description: Never push to GitHub - only local dev server
+alwaysApply: true
+---
+
+# Deployment Rules
+
+- NEVER run `git push` to GitHub. The user handles deployment manually.
+- After making changes, always ensure the local dev server is running and refresh the page.
+- If no dev server is running, start one with `npm run dev`.

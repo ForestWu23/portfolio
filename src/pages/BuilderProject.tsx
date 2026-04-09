@@ -250,7 +250,7 @@ export default function BuilderProject() {
           <div className="mb-16">
             <div className="accent-bar scroll-reveal" />
             <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4 scroll-reveal">Engineering Deep Dive</p>
-            <h3 className="text-4xl serif font-700 mb-3 scroll-reveal tracking-tight">
+            <h3 className="text-5xl serif font-700 mb-3 scroll-reveal tracking-tight">
               A Front-End <span className="accent">Engineer&apos;s</span> Mindset,<br />Not Just a Designer&apos;s Eye.
             </h3>
             <p className="text-sm text-gray-400 max-w-xl mb-14 scroll-reveal leading-relaxed">
