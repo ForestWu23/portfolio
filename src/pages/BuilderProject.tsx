@@ -324,9 +324,9 @@ export default function BuilderProject() {
         </div>
       </div>
 
-      {/* ═══ Windows 5–6 — TWO CONSECUTIVE ═══ */}
+      {/* ═══ Windows 5–6 ═══ */}
 
-      {/* Window 5 — Results (moved before the closing quote) */}
+      {/* Window 5 — Results */}
       <div className="window-section stack-gap">
         <div className="fixed-bg bg-color-5" style={{ backgroundImage: `url(${BASE}images/builder/pool.jpg)` }} />
         <div className="glass-overlay" />
@@ -356,7 +356,7 @@ export default function BuilderProject() {
         <div className="side-text uppercase">Scroll Down</div>
       </div>
 
-      {/* Window 6 — Closing Quote + Back to Portfolio (LAST window before footer) */}
+      {/* Window 6 — Closing Quote */}
       <div className="window-section stack-gap">
         <div className="fixed-bg bg-color-6" style={{ backgroundImage: `url(${BASE}images/builder/villa2.jpg)` }} />
         <div className="glass-overlay" />
@@ -371,6 +371,61 @@ export default function BuilderProject() {
           <button onClick={() => goToSection(0)} className="px-10 py-4 bg-white text-black rounded-full text-[10px] uppercase font-bold">
             Back to Portfolio
           </button>
+        </div>
+      </div>
+
+      {/* ═══ CUSTOMER STORIES ═══ */}
+      <div className="relative bg-white text-black py-32 px-10 md:px-24 z-[70] rounded-t-[40px] stack-gap">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-end mb-16">
+            <div>
+              <h2 className="text-5xl serif mb-4 scroll-reveal">Customer Stories</h2>
+              <p className="text-xs text-gray-400 scroll-reveal">Each project reflects a unique vision brought to life through precision craftsmanship.</p>
+            </div>
+            <span className="px-6 py-2 bg-black text-white rounded-full text-[10px] uppercase font-bold scroll-reveal">Read More →</span>
+          </div>
+          <div className="grid md:grid-cols-2 gap-10">
+            <div className="bg-gray-100 rounded-3xl overflow-hidden p-8 scroll-reveal">
+              <img src={`${BASE}images/builder/story-spanish.png`} className="w-full h-64 object-cover rounded-2xl mb-8" alt="" />
+              <h3 className="text-2xl font-bold mb-4">Casa Esperanza</h3>
+              <div className="flex gap-2 mb-4">
+                <span className="px-3 py-1 bg-white rounded-full text-[8px] font-bold uppercase border">Residential</span>
+                <span className="px-3 py-1 bg-white rounded-full text-[8px] font-bold uppercase border">Los Angeles</span>
+                <span className="px-3 py-1 bg-white rounded-full text-[8px] font-bold uppercase border">Spanish Revival</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed">A lovingly restored 1930s Spanish Colonial with original archways, terra cotta tile, and a courtyard garden that bridges indoor-outdoor living.</p>
+            </div>
+            <div className="bg-gray-100 rounded-3xl overflow-hidden p-8 scroll-reveal">
+              <img src={`${BASE}images/builder/story-modern.png`} className="w-full h-64 object-cover rounded-2xl mb-8" alt="" />
+              <h3 className="text-2xl font-bold mb-4">Mirador Residence</h3>
+              <div className="flex gap-2 mb-4">
+                <span className="px-3 py-1 bg-white rounded-full text-[8px] font-bold uppercase border">Luxury</span>
+                <span className="px-3 py-1 bg-white rounded-full text-[8px] font-bold uppercase border">Coastal</span>
+                <span className="px-3 py-1 bg-white rounded-full text-[8px] font-bold uppercase border">Modern</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed">A contemporary coastal home featuring floor-to-ceiling glass, cantilevered volumes, and an infinity pool that dissolves into the horizon line.</p>
+            </div>
+            <div className="bg-gray-100 rounded-3xl overflow-hidden p-8 scroll-reveal">
+              <img src={`${BASE}images/builder/story-mixed.png`} className="w-full h-64 object-cover rounded-2xl mb-8" alt="" />
+              <h3 className="text-2xl font-bold mb-4">Eastwood Farmhouse</h3>
+              <div className="flex gap-2 mb-4">
+                <span className="px-3 py-1 bg-white rounded-full text-[8px] font-bold uppercase border">Custom Build</span>
+                <span className="px-3 py-1 bg-white rounded-full text-[8px] font-bold uppercase border">Suburban</span>
+                <span className="px-3 py-1 bg-white rounded-full text-[8px] font-bold uppercase border">Contemporary</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed">A ground-up custom build combining warm cedar cladding, stacked stone, and expansive glazing — modern farmhouse living with urban sophistication.</p>
+            </div>
+            <div className="bg-gray-100 rounded-3xl overflow-hidden p-8 scroll-reveal">
+              <img src={`${BASE}images/builder/story-victorian.png`} className="w-full h-64 object-cover rounded-2xl mb-8" alt="" />
+              <h3 className="text-2xl font-bold mb-4">Painted Row Collection</h3>
+              <div className="flex gap-2 mb-4">
+                <span className="px-3 py-1 bg-white rounded-full text-[8px] font-bold uppercase border">Heritage</span>
+                <span className="px-3 py-1 bg-white rounded-full text-[8px] font-bold uppercase border">San Francisco</span>
+                <span className="px-3 py-1 bg-white rounded-full text-[8px] font-bold uppercase border">Victorian</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed">A meticulous preservation of iconic Victorian row houses — restoring ornamental millwork, period-correct color palettes, and structural integrity for the next century.</p>
+            </div>
+          </div>
         </div>
       </div>
 

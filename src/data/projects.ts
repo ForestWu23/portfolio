@@ -32,6 +32,7 @@ export const projects: Project[] = [
     title: 'Green Apple Art Center',
     subtitle: 'Website Redesign For an Art Education Platform',
     thumbnail: 'images/covers/green-apple.jpg',
+    detailPath: '/projects/greenapple',
   },
   {
     id: 'micro-ingredients',
