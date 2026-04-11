@@ -55,7 +55,8 @@ export const projects: Project[] = [
     id: 'nutribites',
     title: 'NutriBites',
     subtitle: 'Website Design For a Pet Nutrition Brand',
-    thumbnail: 'images/covers/kindle.png',
+    thumbnail: 'images/covers/nutribites.png',
+    detailPath: '/projects/nutribites',
   },
   {
     id: 'solara',

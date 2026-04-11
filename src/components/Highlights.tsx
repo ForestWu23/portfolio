@@ -11,7 +11,7 @@ const highlights = [
       </svg>
     ),
     title: 'UX & Interaction Design',
-    desc: 'Designing intuitive, user-centered interfaces across web, mobile, and interactive platforms with 6+ years of hands-on experience in wireframing, prototyping, and design systems.',
+    desc: 'Designing intuitive, user-centered interfaces across web, mobile, and interactive platforms with 10+ years of hands-on experience in wireframing, prototyping, and design systems.',
   },
   {
     icon: (

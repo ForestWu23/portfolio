@@ -86,9 +86,9 @@ export default function Hero({ goToSection, isActive }: HeroProps) {
           initial="hidden"
           animate={isActive ? 'visible' : 'hidden'}
         >
-          I craft user-centered digital experiences that merge strategy,
-          creativity, and functionality, helping brands grow through
-          thoughtful design and measurable results.
+          Product &amp; UX Designer with 10+ years of hands-on experience
+          in UI/UX, branding, and interactive media — turning complex
+          business goals into clear, intuitive digital experiences.
         </motion.p>
 
         <motion.div
