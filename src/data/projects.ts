@@ -14,6 +14,7 @@ export const projects: Project[] = [
     title: 'BuyerFolio',
     subtitle: 'Mobile Product Design For the Home-Selling Journey',
     thumbnail: 'images/covers/buyerfolio.jpg',
+    detailPath: '/projects/buyerfolio',
   },
   {
     id: 'kindle',

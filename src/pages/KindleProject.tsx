@@ -347,7 +347,7 @@ export default function KindleProject() {
       </div>{/* end kd-phone-frame */}
 
       <div className="kd-back-strip">
-        <button onClick={() => goToSection(0)} className="kd-back-btn">← Back to Portfolio</button>
+        <button onClick={() => goToSection(2)} className="kd-back-btn">← Back to Portfolio</button>
       </div>
       <div className="kd-footer-wrap"><Footer /></div>
     </div>

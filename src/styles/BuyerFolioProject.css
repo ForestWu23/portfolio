@@ -1,0 +1,463 @@
+.bf-page {
+  background: #eaeef3;
+  color: #1a1a1a;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ═══ ANIMATED BACKGROUND ═══ */
+.bf-bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══ PHONE FRAME ═══ */
+.bf-phone-frame {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border: 8px solid #1a1a1a;
+  border-radius: 40px;
+  overflow: hidden;
+  margin-top: 100px;
+  margin-bottom: 40px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15);
+}
+
+/* ═══ HERO ═══ */
+.bf-hero {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  align-items: center;
+  padding: 80px 60px 60px;
+  background: linear-gradient(135deg, #ede7f6 0%, #f3e5f5 50%, #fce4ec 100%);
+}
+
+.bf-hero-logo {
+  height: 40px;
+  width: auto;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.bf-hero-title {
+  font-family: 'DM Sans', 'Inter', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+}
+
+.bf-hero-subtitle {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 32px;
+  max-width: 420px;
+}
+
+.bf-hero-meta-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 32px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 20px;
+}
+
+.bf-meta-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.bf-meta-value {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+
+.bf-hero-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bf-hero-banner {
+  width: 100%;
+  max-width: 480px;
+  filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.12));
+}
+
+/* ═══ INNER (consistent padding) ═══ */
+.bf-inner {
+  padding: 70px 60px;
+}
+
+/* ═══ BAND WRAPPERS ═══ */
+.bf-gray-band {
+  background: #f5f5f7;
+}
+
+.bf-purple-band {
+  background: #ede7f6;
+}
+
+/* ═══ EYEBROW ═══ */
+.bf-eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.bf-eyebrow-center { text-align: center; }
+
+/* ═══ TITLES ═══ */
+.bf-main-title {
+  font-family: 'DM Sans', 'Inter', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.bf-main-subtitle {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #555;
+  max-width: 700px;
+  margin-bottom: 40px;
+}
+
+.bf-section-heading {
+  font-family: 'DM Sans', 'Inter', sans-serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  color: #1a1a1a;
+}
+
+.bf-heading-center { text-align: center; }
+
+/* ═══ BODY TEXT ═══ */
+.bf-body {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.bf-body-narrow {
+  max-width: 750px;
+}
+
+.bf-body-center {
+  text-align: center;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ═══ ROLE CARDS (visual grid instead of plain bullet list) ═══ */
+.bf-role-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.bf-role-card {
+  background: #f9f5ff;
+  border-radius: 16px;
+  padding: 28px 24px;
+  border-top: 3px solid #7c3aed;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bf-role-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.1);
+}
+
+.bf-role-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #ede7f6;
+  margin-bottom: 16px;
+  color: #7c3aed;
+}
+
+.bf-role-card h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.bf-role-card p {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: #555;
+}
+
+/* ═══ FULL-WIDTH IMAGES ═══ */
+.bf-full-img {
+  width: 100%;
+  margin-top: 32px;
+  border-radius: 12px;
+}
+
+/* ═══ RESEARCH GRID ═══ */
+.bf-research-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.bf-research-grid img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+}
+
+/* ═══ INSIGHT CARDS ═══ */
+.bf-insights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.bf-insight-card {
+  background: #f5f5f7;
+  border-radius: 16px;
+  padding: 28px 24px;
+  border-left: 3px solid #7c3aed;
+}
+
+.bf-insight-num {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #7c3aed;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+
+.bf-insight-card p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* ═══ STRATEGY CARDS ═══ */
+.bf-strategy-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.bf-strategy-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 24px;
+}
+
+.bf-strategy-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #1a1a1a;
+}
+
+.bf-strategy-card p {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: #666;
+}
+
+/* ═══ PHONE ROW (3 phones) ═══ */
+.bf-phone-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  align-items: start;
+  margin-top: 32px;
+}
+
+.bf-phone-img {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  display: block;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.1));
+}
+
+/* ═══ PHONE HOVER ═══ */
+.bf-phone-hover {
+  display: inline-block;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+  text-align: center;
+}
+
+.bf-phone-hover img {
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
+/* ═══ TESTIMONIAL ═══ */
+.bf-testimonial {
+  background: #f5f5f7;
+  border-radius: 16px;
+  padding: 48px 40px;
+  border-left: 4px solid #7c3aed;
+}
+
+.bf-testimonial blockquote {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #333;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.bf-testimonial cite {
+  display: block;
+  font-size: 0.85rem;
+  font-style: normal;
+  font-weight: 600;
+  color: #666;
+}
+
+/* ═══ BACK + FOOTER ═══ */
+.bf-back-strip {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 48px 20px;
+}
+
+.bf-back-btn {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 40px;
+  padding: 12px 32px;
+  font-size: 0.85rem;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.bf-back-btn:hover {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.bf-footer-wrap {
+  position: relative;
+  z-index: 2;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 1200px) {
+  .bf-phone-frame {
+    margin-left: 24px;
+    margin-right: 24px;
+    border-radius: 32px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .bf-hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 80px 40px 60px;
+  }
+
+  .bf-hero-right { order: -1; }
+
+  .bf-hero-meta-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bf-strategy-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .bf-phone-row {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .bf-phone-img {
+    max-width: 260px;
+  }
+
+  .bf-insights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bf-role-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .bf-phone-frame {
+    border-width: 5px;
+    border-radius: 24px;
+    margin-top: 80px;
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+
+  .bf-inner {
+    padding: 50px 24px;
+  }
+
+  .bf-hero {
+    padding: 70px 24px 50px;
+  }
+
+  .bf-hero-meta-row {
+    grid-template-columns: 1fr;
+  }
+
+  .bf-research-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bf-phone-row {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}

@@ -472,7 +472,7 @@ export default function GreenAppleProject() {
 
       {/* ═══ FOOTER ═══ */}
       <div className="ga-back-strip">
-        <button onClick={() => goToSection(0)} className="ga-back-btn">← Back to Portfolio</button>
+        <button onClick={() => goToSection(2)} className="ga-back-btn">← Back to Portfolio</button>
       </div>
       <div className="ga-footer-wrap"><Footer /></div>
     </div>

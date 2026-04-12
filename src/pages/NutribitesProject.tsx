@@ -267,7 +267,7 @@ export default function NutribitesProject() {
       </section>
 
       <div className="nb-back-strip">
-        <button onClick={() => goToSection(0)} className="nb-back-btn">← Back to Portfolio</button>
+        <button onClick={() => goToSection(2)} className="nb-back-btn">← Back to Portfolio</button>
       </div>
       <div className="nb-footer-wrap"><Footer /></div>
     </div>

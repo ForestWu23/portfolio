@@ -2,6 +2,7 @@ import { useRef, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { projects, Project } from '../data/projects'
+import { checkAuth } from './AuthGate'
 import '../styles/Projects.css'
 
 const TILT_MAX = 4
@@ -9,22 +10,46 @@ const IMG_SHIFT = 8
 const SCALE_CARD = 1.03
 const SCALE_IMG = 1.05
 
+const HASH = '2d6c50388f532bd1bbe52e5a25fad2a7fd3955bb2855b0b72cd28765e78b62e9'
+const STORAGE_KEY = 'pf_auth'
+
+async function sha256(text: string): Promise<string> {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text))
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
+}
+
 function PasswordModal({
   project,
   onClose,
+  onSuccess,
 }: {
   project: Project
   onClose: () => void
+  onSuccess: () => void
 }) {
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
   const [shaking, setShaking] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const isFakeProtected = !!project.passwordProtected
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError(true)
-    setShaking(true)
-    setTimeout(() => setShaking(false), 500)
+    if (isFakeProtected) {
+      setError(true)
+      setShaking(true)
+      setTimeout(() => setShaking(false), 500)
+      return
+    }
+    const h = await sha256(password)
+    if (h === HASH) {
+      sessionStorage.setItem(STORAGE_KEY, HASH)
+      onSuccess()
+    } else {
+      setError(true)
+      setShaking(true)
+      setTimeout(() => setShaking(false), 500)
+    }
   }
 
   return (
@@ -53,7 +78,9 @@ function PasswordModal({
         </div>
         <h3 className="pw-modal-title">{project.title}</h3>
         <p className="pw-modal-desc">
-          This project is password-protected. Please contact the portfolio owner to request access.
+          {isFakeProtected
+            ? 'This project is password-protected. Please contact the portfolio owner to request access.'
+            : 'This project is password-protected. Please enter the password to view.'}
         </p>
         <form onSubmit={handleSubmit} className="pw-modal-form">
           <input
@@ -124,12 +151,19 @@ function ProjectCard({
   }, [])
 
   const handleClick = useCallback(() => {
+    if (project.comingSoon) return
     if (project.passwordProtected) {
       onProtectedClick(project)
     } else if (project.detailPath) {
-      navigate(project.detailPath)
+      if (checkAuth()) {
+        navigate(project.detailPath)
+      } else {
+        onProtectedClick(project)
+      }
     }
   }, [project, navigate, onProtectedClick])
+
+  const showLock = project.passwordProtected || project.detailPath
 
   return (
     <motion.div
@@ -164,7 +198,7 @@ function ProjectCard({
       <div className="project-card-overlay">
         <h3 className="project-card-title">{project.title}</h3>
         <p className="project-card-subtitle">{project.subtitle}</p>
-        {project.passwordProtected && (
+        {showLock && (
           <span className="project-card-lock">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -179,6 +213,14 @@ function ProjectCard({
 
 export default function Projects() {
   const [protectedProject, setProtectedProject] = useState<Project | null>(null)
+  const navigate = useNavigate()
+
+  const handleSuccess = useCallback(() => {
+    if (protectedProject?.detailPath) {
+      navigate(protectedProject.detailPath)
+      setProtectedProject(null)
+    }
+  }, [protectedProject, navigate])
 
   return (
     <section className="projects">
@@ -197,6 +239,7 @@ export default function Projects() {
           <PasswordModal
             project={protectedProject}
             onClose={() => setProtectedProject(null)}
+            onSuccess={handleSuccess}
           />
         )}
       </AnimatePresence>

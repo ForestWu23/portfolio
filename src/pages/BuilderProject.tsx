@@ -368,7 +368,7 @@ export default function BuilderProject() {
             The same should be true of the web. This project proves that great
             web design requires both a designer&apos;s eye and an engineer&apos;s rigor.
           </p>
-          <button onClick={() => goToSection(0)} className="px-10 py-4 bg-white text-black rounded-full text-[10px] uppercase font-bold">
+          <button onClick={() => goToSection(2)} className="px-10 py-4 bg-white text-black rounded-full text-[10px] uppercase font-bold">
             Back to Portfolio
           </button>
         </div>

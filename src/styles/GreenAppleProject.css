@@ -394,7 +394,7 @@
   gap: 48px;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 40px 80px;
+  padding: 40px 80px 100px;
 }
 
 .ga-outcome-row h4 {
