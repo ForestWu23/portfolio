@@ -20,7 +20,7 @@
   overflow: hidden;
   cursor: pointer;
   aspect-ratio: 1980 / 1080;
-  border-radius: 4px;
+  border-radius: 15px; /* ← adjust this to control card corner roundness */
   will-change: transform;
   transition: transform 0.6s cubic-bezier(0.03, 0.72, 0.32, 1);
 }
@@ -62,7 +62,7 @@
 .project-card-shadow {
   position: absolute;
   inset: 0;
-  border-radius: 4px;
+  border-radius: 12px;
   pointer-events: none;
   transition: box-shadow 0.5s cubic-bezier(0.03, 0.98, 0.52, 0.99);
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
@@ -108,6 +108,137 @@
   }
 }
 
+.project-card-lock {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ═══ PASSWORD MODAL ═══ */
+
+.pw-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.pw-modal {
+  position: relative;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 48px 40px 40px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+}
+
+.pw-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.pw-modal-close:hover {
+  color: #fff;
+}
+
+.pw-modal-icon {
+  margin: 0 auto 16px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.pw-modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.pw-modal-desc {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.pw-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pw-modal-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.pw-modal-input:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.pw-modal-input.pw-input-error {
+  border-color: #e05252;
+}
+
+.pw-modal-error {
+  font-size: 0.76rem;
+  color: #e05252;
+  text-align: left;
+}
+
+.pw-modal-submit {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #fff;
+  color: #111;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.pw-modal-submit:hover {
+  opacity: 0.85;
+}
+
+@keyframes pw-shake-anim {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.pw-shake {
+  animation: pw-shake-anim 0.4s ease-in-out;
+}
+
 @media (max-width: 768px) {
   .projects {
     padding: 80px 20px 20px;
@@ -116,5 +247,9 @@
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+  }
+
+  .pw-modal {
+    padding: 36px 24px 28px;
   }
 }

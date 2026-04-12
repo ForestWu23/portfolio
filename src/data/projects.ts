@@ -5,16 +5,10 @@ export interface Project {
   thumbnail: string
   detailPath?: string
   comingSoon?: boolean
+  passwordProtected?: boolean
 }
 
 export const projects: Project[] = [
-  {
-    id: 'ridgeline-homes',
-    title: 'Ridgeline Homes',
-    subtitle: 'Immersive Web Design For Modern Construction',
-    thumbnail: 'images/builder/pool.jpg',
-    detailPath: '/projects/builder',
-  },
   {
     id: 'buyerfolio',
     title: 'BuyerFolio',
@@ -26,6 +20,7 @@ export const projects: Project[] = [
     title: 'Kindle',
     subtitle: 'Mobile Product Redesign For Digital Reading',
     thumbnail: 'images/covers/kindle.png',
+    detailPath: '/projects/kindle',
   },
   {
     id: 'green-apple',
@@ -35,10 +30,32 @@ export const projects: Project[] = [
     detailPath: '/projects/greenapple',
   },
   {
+    id: 'amazon-landing',
+    title: 'Amazon Product Landing Page',
+    subtitle: 'Designing a High-Converting Amazon Product Experience for Micro Ingredient',
+    thumbnail: 'images/covers/amazon-landing.jpg',
+    passwordProtected: true,
+  },
+  {
     id: 'micro-ingredients',
     title: 'Micro Ingredients',
-    subtitle: 'Amazon Landing Page For Conversion and Brand Storytelling',
-    thumbnail: 'images/covers/kindle.png',
+    subtitle: 'Creative Direction for High-Impact TikTok Product Content',
+    thumbnail: 'images/covers/micro-ingredients.png',
+    passwordProtected: true,
+  },
+  {
+    id: 'nutribites',
+    title: 'NutriBites',
+    subtitle: 'Website Design For a Pet Nutrition Brand',
+    thumbnail: 'images/covers/nutribites.png',
+    detailPath: '/projects/nutribites',
+  },
+  {
+    id: 'ridgeline-homes',
+    title: 'Ridgeline Homes',
+    subtitle: 'Immersive Web Design For Modern Construction',
+    thumbnail: 'images/covers/ridgeline-homes.png',
+    detailPath: '/projects/builder',
   },
   {
     id: 'huagen',
@@ -50,26 +67,6 @@ export const projects: Project[] = [
     id: 'velvety',
     title: 'Velvety Design',
     subtitle: 'Website Design For a Creative Design Studio',
-    thumbnail: 'images/covers/kindle.png',
-  },
-  {
-    id: 'nutribites',
-    title: 'NutriBites',
-    subtitle: 'Website Design For a Pet Nutrition Brand',
-    thumbnail: 'images/covers/nutribites.png',
-    detailPath: '/projects/nutribites',
-  },
-  {
-    id: 'solara',
-    title: 'Solara Wellness',
-    subtitle: 'Brand Identity and App Design For a Wellness Platform',
-    thumbnail: '',
-    comingSoon: true,
-  },
-  {
-    id: 'nova-finance',
-    title: 'Nova Finance',
-    subtitle: 'Dashboard Design For Personal Finance Management',
     thumbnail: '',
     comingSoon: true,
   },

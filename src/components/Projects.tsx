@@ -1,7 +1,7 @@
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { projects } from '../data/projects'
+import { motion, AnimatePresence } from 'framer-motion'
+import { projects, Project } from '../data/projects'
 import '../styles/Projects.css'
 
 const TILT_MAX = 4
@@ -9,7 +9,78 @@ const IMG_SHIFT = 8
 const SCALE_CARD = 1.03
 const SCALE_IMG = 1.05
 
-function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
+function PasswordModal({
+  project,
+  onClose,
+}: {
+  project: Project
+  onClose: () => void
+}) {
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState(false)
+  const [shaking, setShaking] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setError(true)
+    setShaking(true)
+    setTimeout(() => setShaking(false), 500)
+  }
+
+  return (
+    <motion.div
+      className="pw-modal-backdrop"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      onClick={onClose}
+    >
+      <motion.div
+        className={`pw-modal${shaking ? ' pw-shake' : ''}`}
+        initial={{ opacity: 0, scale: 0.92, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.92, y: 20 }}
+        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+        onClick={e => e.stopPropagation()}
+      >
+        <button className="pw-modal-close" onClick={onClose} aria-label="Close">×</button>
+        <div className="pw-modal-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0110 0v4" />
+          </svg>
+        </div>
+        <h3 className="pw-modal-title">{project.title}</h3>
+        <p className="pw-modal-desc">
+          This project is password-protected. Please contact the portfolio owner to request access.
+        </p>
+        <form onSubmit={handleSubmit} className="pw-modal-form">
+          <input
+            type="password"
+            className={`pw-modal-input${error ? ' pw-input-error' : ''}`}
+            placeholder="Enter password"
+            value={password}
+            onChange={e => { setPassword(e.target.value); setError(false) }}
+            autoFocus
+          />
+          {error && <span className="pw-modal-error">Incorrect password. Please try again.</span>}
+          <button type="submit" className="pw-modal-submit">Unlock</button>
+        </form>
+      </motion.div>
+    </motion.div>
+  )
+}
+
+function ProjectCard({
+  project,
+  index,
+  onProtectedClick,
+}: {
+  project: Project
+  index: number
+  onProtectedClick: (p: Project) => void
+}) {
   const cardRef = useRef<HTMLDivElement>(null)
   const imgRef = useRef<HTMLImageElement>(null)
   const rafRef = useRef<number>(0)
@@ -53,10 +124,12 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
   }, [])
 
   const handleClick = useCallback(() => {
-    if (project.detailPath) {
+    if (project.passwordProtected) {
+      onProtectedClick(project)
+    } else if (project.detailPath) {
       navigate(project.detailPath)
     }
-  }, [project.detailPath, navigate])
+  }, [project, navigate, onProtectedClick])
 
   return (
     <motion.div
@@ -91,19 +164,42 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
       <div className="project-card-overlay">
         <h3 className="project-card-title">{project.title}</h3>
         <p className="project-card-subtitle">{project.subtitle}</p>
+        {project.passwordProtected && (
+          <span className="project-card-lock">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
+          </span>
+        )}
       </div>
     </motion.div>
   )
 }
 
 export default function Projects() {
+  const [protectedProject, setProtectedProject] = useState<Project | null>(null)
+
   return (
     <section className="projects">
       <div className="projects-grid">
         {projects.map((project, i) => (
-          <ProjectCard key={project.id} project={project} index={i} />
+          <ProjectCard
+            key={project.id}
+            project={project}
+            index={i}
+            onProtectedClick={setProtectedProject}
+          />
         ))}
       </div>
+      <AnimatePresence>
+        {protectedProject && (
+          <PasswordModal
+            project={protectedProject}
+            onClose={() => setProtectedProject(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   )
 }

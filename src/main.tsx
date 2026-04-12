@@ -5,6 +5,7 @@ import App from './App'
 import BuilderProject from './pages/BuilderProject'
 import NutribitesProject from './pages/NutribitesProject'
 import GreenAppleProject from './pages/GreenAppleProject'
+import KindleProject from './pages/KindleProject'
 import './styles/global.css'
 
 createRoot(document.getElementById('root')!).render(
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/projects/builder" element={<BuilderProject />} />
         <Route path="/projects/nutribites" element={<NutribitesProject />} />
         <Route path="/projects/greenapple" element={<GreenAppleProject />} />
+        <Route path="/projects/kindle" element={<KindleProject />} />
       </Routes>
     </HashRouter>
   </StrictMode>,
