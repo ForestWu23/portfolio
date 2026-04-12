@@ -1,0 +1,24 @@
+---
+description: Google Analytics gtag requirement for all pages
+globs:
+alwaysApply: true
+---
+
+# Google Analytics Tag
+
+This portfolio uses Google Analytics (gtag.js) with tracking ID `G-G1YQQEQF4E`.
+
+The gtag snippet is placed in `index.html` immediately after `<head>`. Since this is a single-page React app (SPA) with HashRouter, all routes share the same `index.html` — no additional per-page gtag insertion is needed.
+
+However, if a **new standalone HTML page** is ever created outside the React SPA, the following snippet MUST be added immediately after `<head>`:
+
+```html
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G1YQQEQF4E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-G1YQQEQF4E');
+</script>
+```

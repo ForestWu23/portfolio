@@ -9,6 +9,49 @@ import '../styles/KindleProject.css'
 gsap.registerPlugin(ScrollTrigger)
 const B = import.meta.env.BASE_URL
 
+const TILT = 6
+const SHIFT = 10
+const ZOOM = 1.08
+
+function PhoneImg({ src, alt, className }: { src: string; alt: string; className?: string }) {
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const imgRef = useRef<HTMLImageElement>(null)
+  const rafRef = useRef(0)
+
+  const onMove = useCallback((e: React.MouseEvent) => {
+    cancelAnimationFrame(rafRef.current)
+    rafRef.current = requestAnimationFrame(() => {
+      const wrap = wrapRef.current
+      const img = imgRef.current
+      if (!wrap || !img) return
+      const r = wrap.getBoundingClientRect()
+      const nx = (e.clientX - r.left) / r.width
+      const ny = (e.clientY - r.top) / r.height
+      const ry = (nx - 0.5) * TILT * 2
+      const rx = (0.5 - ny) * TILT * 2
+      wrap.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`
+      img.style.transform = `translate(${(nx - 0.5) * SHIFT}px, ${(ny - 0.5) * SHIFT}px) scale(${ZOOM})`
+    })
+  }, [])
+
+  const onLeave = useCallback(() => {
+    cancelAnimationFrame(rafRef.current)
+    if (wrapRef.current) wrapRef.current.style.transform = 'perspective(800px) rotateX(0) rotateY(0)'
+    if (imgRef.current) imgRef.current.style.transform = 'translate(0,0) scale(1)'
+  }, [])
+
+  return (
+    <div
+      ref={wrapRef}
+      className="kd-phone-hover"
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+    >
+      <img ref={imgRef} src={src} alt={alt} className={className} />
+    </div>
+  )
+}
+
 function FloatingDotsCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -153,7 +196,7 @@ export default function KindleProject() {
             <p className="kd-body">The redesign focuses on three key areas: helping users find books more easily, making personal libraries easier to manage, and creating a calmer, more customizable reading experience.</p>
           </div>
           <div className="kd-overview-right">
-            <img src={`${B}images/kindle/splash.png`} alt="Kindle splash screen" className="kd-overview-phone" />
+            <PhoneImg src={`${B}images/kindle/splash.png`} alt="Kindle splash screen" className="kd-overview-phone" />
           </div>
         </div>
 
@@ -193,10 +236,10 @@ export default function KindleProject() {
             <span className="kd-eyebrow">Key Findings</span>
             <h2 className="kd-section-heading">What the testing revealed</h2>
             <div className="kd-findings-grid">
-              <div className="kd-finding-card kd-reveal"><img src={`${B}images/kindle/search-typing.png`} alt="Search autocomplete" className="kd-finding-img" /><h4>Search lacked intuitive support</h4><p>One participant used search immediately, while another browsed the home page and Top 10 list first before returning to search. This suggested that search entry and support were not always intuitive enough for different user behaviors.</p></div>
-              <div className="kd-finding-card kd-reveal"><img src={`${B}images/kindle/bookshelves-scrolled.png`} alt="Bookshelf with reading status" className="kd-finding-img" /><h4>Bookshelf status needed better readability</h4><p>Reading status labels such as "read" and "unread" were too small to scan comfortably, making the library feel less clear than it should.</p></div>
-              <div className="kd-finding-card kd-reveal"><img src={`${B}images/kindle/reading-new-icons.png`} alt="Reading controls" className="kd-finding-img" /><h4>Primary actions were too easy to miss</h4><p>Important actions such as "Add to bookshelf" needed stronger emphasis and larger touch targets to improve clarity and usability.</p></div>
-              <div className="kd-finding-card kd-reveal"><img src={`${B}images/kindle/book-detail.png`} alt="Book detail page" className="kd-finding-img" /><h4>Some icons felt visually ambiguous</h4><p>Participants could confuse certain actions, including exit and share-related icons, which weakened confidence during navigation.</p></div>
+              <div className="kd-finding-card kd-reveal"><PhoneImg src={`${B}images/kindle/search-typing.png`} alt="Search autocomplete" className="kd-finding-img" /><h4>Search lacked intuitive support</h4><p>One participant used search immediately, while another browsed the home page and Top 10 list first before returning to search. This suggested that search entry and support were not always intuitive enough for different user behaviors.</p></div>
+              <div className="kd-finding-card kd-reveal"><PhoneImg src={`${B}images/kindle/bookshelves-scrolled.png`} alt="Bookshelf with reading status" className="kd-finding-img" /><h4>Bookshelf status needed better readability</h4><p>Reading status labels such as "read" and "unread" were too small to scan comfortably, making the library feel less clear than it should.</p></div>
+              <div className="kd-finding-card kd-reveal"><PhoneImg src={`${B}images/kindle/reading-new-icons.png`} alt="Reading controls" className="kd-finding-img" /><h4>Primary actions were too easy to miss</h4><p>Important actions such as "Add to bookshelf" needed stronger emphasis and larger touch targets to improve clarity and usability.</p></div>
+              <div className="kd-finding-card kd-reveal"><PhoneImg src={`${B}images/kindle/book-detail.png`} alt="Book detail page" className="kd-finding-img" /><h4>Some icons felt visually ambiguous</h4><p>Participants could confuse certain actions, including exit and share-related icons, which weakened confidence during navigation.</p></div>
             </div>
           </div>
         </div>
@@ -219,9 +262,9 @@ export default function KindleProject() {
             <h2 className="kd-section-heading">Smarter discovery</h2>
             <p className="kd-body kd-body-narrow">Discovery is the first step in the reading journey. I redesigned the home and search experience to make exploration more visible, more scannable, and easier to enter from multiple points.</p>
             <div className="kd-comparison-row kd-reveal">
-              <div className="kd-comp-item"><span className="kd-comp-label">Before</span><img src={`${B}images/kindle/home-old.png`} alt="Old homepage" /></div>
-              <div className="kd-comp-item"><span className="kd-comp-label">Low-fidelity</span><img src={`${B}images/kindle/home-lowfi.png`} alt="Homepage wireframe" /></div>
-              <div className="kd-comp-item"><span className="kd-comp-label">After</span><img src={`${B}images/kindle/home-new.png`} alt="New homepage" /></div>
+              <div className="kd-comp-item"><span className="kd-comp-label">Before</span><PhoneImg src={`${B}images/kindle/home-old.png`} alt="Old homepage" /></div>
+              <div className="kd-comp-item"><span className="kd-comp-label">Low-fidelity</span><PhoneImg src={`${B}images/kindle/home-lowfi.png`} alt="Homepage wireframe" /></div>
+              <div className="kd-comp-item"><span className="kd-comp-label">After</span><PhoneImg src={`${B}images/kindle/home-new.png`} alt="New homepage" /></div>
             </div>
             <div className="kd-pso-row kd-reveal">
               <div className="kd-pso-col"><h4>Problem</h4><p>Users did not always begin with the same behavior. Some relied on search immediately, while others browsed first and only searched later. The discovery experience needed to support both paths more naturally.</p></div>
@@ -237,9 +280,9 @@ export default function KindleProject() {
           <h2 className="kd-section-heading">Clearer bookshelf management</h2>
           <p className="kd-body kd-body-narrow">A personal library should feel organized, readable, and easy to manage over time.</p>
           <div className="kd-comparison-row kd-reveal">
-            <div className="kd-comp-item"><span className="kd-comp-label">Before</span><img src={`${B}images/kindle/bookshelf-old.png`} alt="Old bookshelf" /></div>
-            <div className="kd-comp-item"><span className="kd-comp-label">Low-fidelity</span><img src={`${B}images/kindle/bookshelf-lowfi.png`} alt="Bookshelf wireframe" /></div>
-            <div className="kd-comp-item"><span className="kd-comp-label">After</span><img src={`${B}images/kindle/bookshelf-manage.png`} alt="Redesigned bookshelf" /></div>
+            <div className="kd-comp-item"><span className="kd-comp-label">Before</span><PhoneImg src={`${B}images/kindle/bookshelf-old.png`} alt="Old bookshelf" /></div>
+            <div className="kd-comp-item"><span className="kd-comp-label">Low-fidelity</span><PhoneImg src={`${B}images/kindle/bookshelf-lowfi.png`} alt="Bookshelf wireframe" /></div>
+            <div className="kd-comp-item"><span className="kd-comp-label">After</span><PhoneImg src={`${B}images/kindle/bookshelf-manage.png`} alt="Redesigned bookshelf" /></div>
           </div>
           <div className="kd-pso-row kd-reveal">
             <div className="kd-pso-col"><h4>Problem</h4><p>The bookshelf needed stronger hierarchy and better status visibility so users could quickly tell what they had read, what they were currently reading, and what still remained.</p></div>
@@ -255,9 +298,9 @@ export default function KindleProject() {
             <h2 className="kd-section-heading">More immersive reading controls</h2>
             <p className="kd-body kd-body-narrow">Reading settings should support focus, not interrupt it.</p>
             <div className="kd-comparison-row kd-reveal">
-              <div className="kd-comp-item"><span className="kd-comp-label">Before</span><img src={`${B}images/kindle/reading-old.png`} alt="Old reading view" /></div>
-              <div className="kd-comp-item"><span className="kd-comp-label">Low-fidelity</span><img src={`${B}images/kindle/reading-lowfi.png`} alt="Reading wireframe" /></div>
-              <div className="kd-comp-item"><span className="kd-comp-label">After</span><img src={`${B}images/kindle/reading-new.png`} alt="New reading view" /></div>
+              <div className="kd-comp-item"><span className="kd-comp-label">Before</span><PhoneImg src={`${B}images/kindle/reading-old.png`} alt="Old reading view" /></div>
+              <div className="kd-comp-item"><span className="kd-comp-label">Low-fidelity</span><PhoneImg src={`${B}images/kindle/reading-lowfi.png`} alt="Reading wireframe" /></div>
+              <div className="kd-comp-item"><span className="kd-comp-label">After</span><PhoneImg src={`${B}images/kindle/reading-new.png`} alt="New reading view" /></div>
             </div>
             <div className="kd-pso-row kd-reveal">
               <div className="kd-pso-col"><h4>Problem</h4><p>Readers need quick access to brightness, font controls, chapter navigation, and display settings, but these controls should remain easy to reach without breaking immersion.</p></div>

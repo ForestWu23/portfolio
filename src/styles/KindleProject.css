@@ -333,6 +333,18 @@
   text-align: center;
 }
 
+/* ═══ PHONE HOVER (tilt + zoom + cursor-follow) ═══ */
+.kd-phone-hover {
+  display: inline-block;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
+.kd-phone-hover img {
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
 .kd-comp-label {
   display: block;
   font-size: 0.72rem;
