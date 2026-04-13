@@ -40,6 +40,7 @@ export default function NutribitesProject() {
     <div className="nb-case" ref={pageRef}>
       <Navbar goToSection={goToSection} blendMode />
 
+      <div className="nb-hero-bg">
       <section className="nb-hero">
         <div className="nb-hero-left">
           <h1 className="nb-hero-title">NutriBites</h1>
@@ -58,6 +59,7 @@ export default function NutribitesProject() {
           <img src={`${B}images/nutribites/hero-mockup.png`} alt="NutriBites homepage mockup" className="nb-hero-mockup" />
         </div>
       </section>
+      </div>
 
       <section className="nb-section nb-reveal">
         <div className="nb-section-header">

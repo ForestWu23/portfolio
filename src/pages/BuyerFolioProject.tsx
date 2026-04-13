@@ -47,7 +47,7 @@ function PhoneImg({ src, alt, className }: { src: string; alt: string; className
   )
 }
 
-function FloatingDotsCanvas() {
+function MagneticOrbsCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -59,60 +59,108 @@ function FloatingDotsCanvas() {
     const dpr = window.devicePixelRatio || 1
     let w = 0, h = 0
     const resize = () => {
-      w = window.innerWidth
-      h = window.innerHeight
-      canvas.width = w * dpr
-      canvas.height = h * dpr
-      canvas.style.width = w + 'px'
-      canvas.style.height = h + 'px'
+      w = window.innerWidth; h = window.innerHeight
+      canvas.width = w * dpr; canvas.height = h * dpr
+      canvas.style.width = w + 'px'; canvas.style.height = h + 'px'
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
     resize()
     window.addEventListener('resize', resize)
 
-    const COUNT = 50
-    const dots: { x: number; y: number; r: number; vx: number; vy: number; alpha: number; phase: number }[] = []
-    for (let i = 0; i < COUNT; i++) {
-      dots.push({
-        x: Math.random() * w, y: Math.random() * h,
-        r: Math.random() * 2.5 + 1.5,
-        vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
-        alpha: Math.random() * 0.2 + 0.12, phase: Math.random() * Math.PI * 2,
-      })
+    // Mouse
+    const mouse = { x: w / 2, y: h / 2 }
+    const onMove = (e: MouseEvent) => { mouse.x = e.clientX; mouse.y = e.clientY }
+    window.addEventListener('mousemove', onMove)
+
+    // Orbs
+    const COLORS = [
+      { r: 149, g: 117, b: 205 }, // soft purple
+      { r: 186, g: 104, b: 200 }, // violet-pink
+      { r: 121, g: 134, b: 203 }, // blue-lavender
+      { r: 240, g: 98,  b: 146 }, // rose
+      { r: 206, g: 147, b: 216 }, // orchid
+    ]
+
+    type Orb = {
+      x: number; y: number; ox: number; oy: number
+      vx: number; vy: number
+      radius: number; alpha: number
+      r: number; g: number; b: number
     }
 
-    let raf = 0, t = 0
+    const COUNT = 14
+    const orbs: Orb[] = Array.from({ length: COUNT }, () => {
+      const c = COLORS[Math.floor(Math.random() * COLORS.length)]
+      const x = Math.random() * (w || window.innerWidth)
+      const y = Math.random() * (h || window.innerHeight)
+      return {
+        x, y, ox: x, oy: y,
+        vx: 0, vy: 0,
+        radius: Math.random() * 80 + 60,
+        alpha: Math.random() * 0.18 + 0.14,
+        r: c.r, g: c.g, b: c.b,
+      }
+    })
+
+    // Slow organic drift
+    let t = 0
+    const REPEL_DIST = 200
+    const REPEL_FORCE = 3.5
+    const SPRING = 0.028
+    const DAMPING = 0.88
+
+    let raf = 0
     const draw = () => {
       ctx.clearRect(0, 0, w, h)
-      t += 0.01
-      for (const d of dots) {
-        d.x += d.vx; d.y += d.vy
-        if (d.x < -20) d.x = w + 20; if (d.x > w + 20) d.x = -20
-        if (d.y < -20) d.y = h + 20; if (d.y > h + 20) d.y = -20
-        const pulse = 0.5 + 0.5 * Math.sin(t * 2 + d.phase)
-        const a = d.alpha * (0.6 + 0.4 * pulse)
+      t += 0.004
+
+      for (let i = 0; i < COUNT; i++) {
+        const o = orbs[i]
+
+        // Organic drift on home position
+        const drift = 22
+        const targetX = o.ox + Math.sin(t * 0.7 + i * 1.3) * drift
+        const targetY = o.oy + Math.cos(t * 0.5 + i * 2.1) * drift
+
+        // Cursor repulsion
+        const dx = o.x - mouse.x
+        const dy = o.y - mouse.y
+        const dist = Math.sqrt(dx * dx + dy * dy)
+        let repX = 0, repY = 0
+        if (dist < REPEL_DIST && dist > 0) {
+          const force = (1 - dist / REPEL_DIST) * REPEL_FORCE
+          repX = (dx / dist) * force * 18
+          repY = (dy / dist) * force * 18
+        }
+
+        // Spring towards drifted target + repulsion
+        o.vx += (targetX + repX - o.x) * SPRING
+        o.vy += (targetY + repY - o.y) * SPRING
+        o.vx *= DAMPING
+        o.vy *= DAMPING
+        o.x += o.vx
+        o.y += o.vy
+
+        // Draw radial gradient orb
+        const grad = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.radius)
+        grad.addColorStop(0,   `rgba(${o.r},${o.g},${o.b},${o.alpha})`)
+        grad.addColorStop(0.5, `rgba(${o.r},${o.g},${o.b},${o.alpha * 0.4})`)
+        grad.addColorStop(1,   `rgba(${o.r},${o.g},${o.b},0)`)
         ctx.beginPath()
-        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(124, 58, 237, ${a})`
+        ctx.arc(o.x, o.y, o.radius, 0, Math.PI * 2)
+        ctx.fillStyle = grad
         ctx.fill()
       }
-      const LINE_DIST = 160
-      for (let i = 0; i < COUNT; i++) {
-        for (let j = i + 1; j < COUNT; j++) {
-          const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < LINE_DIST) {
-            ctx.beginPath()
-            ctx.moveTo(dots[i].x, dots[i].y); ctx.lineTo(dots[j].x, dots[j].y)
-            ctx.strokeStyle = `rgba(124, 58, 237, ${0.1 * (1 - dist / LINE_DIST)})`
-            ctx.lineWidth = 0.7; ctx.stroke()
-          }
-        }
-      }
+
       raf = requestAnimationFrame(draw)
     }
     draw()
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize) }
+
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('resize', resize)
+      window.removeEventListener('mousemove', onMove)
+    }
   }, [])
 
   return <canvas ref={canvasRef} className="bf-bg-canvas" />
@@ -142,7 +190,7 @@ export default function BuyerFolioProject() {
 
   return (
     <div className="bf-page" ref={pageRef}>
-      <FloatingDotsCanvas />
+      <MagneticOrbsCanvas />
       <Navbar goToSection={goToSection} blendMode />
 
       <div className="bf-phone-frame">

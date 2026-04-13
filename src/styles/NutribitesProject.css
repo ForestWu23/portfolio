@@ -8,14 +8,19 @@
 /* ════════════════════════
    HERO SECTION
    ════════════════════════ */
+.nb-hero-bg {
+  width: 100%;
+  background: linear-gradient(135deg, #eef3fb 0%, #f5f0eb 100%);
+}
+
 .nb-hero {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 1.8fr;
   gap: 60px;
   align-items: center;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 160px 80px 100px;
+  padding: 140px 80px 0px;
 }
 
 .nb-hero-title {
@@ -55,14 +60,15 @@
 
 .nb-hero-right {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 
 .nb-hero-mockup {
   width: 100%;
-  max-width: 700px;
+  max-width: 900px;
   display: block;
+  transform: translateX(100px);
 }
 
 /* ════════════════════════
