@@ -68,7 +68,7 @@ export const projects: Project[] = [
     id: 'velvety',
     title: 'Velvety Design',
     subtitle: 'Website Design For a Creative Design Studio',
-    thumbnail: '',
+    thumbnail: 'images/covers/velvety.png',
     comingSoon: true,
   },
 ]

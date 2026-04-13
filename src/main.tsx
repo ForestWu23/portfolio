@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import App from './App'
 import { AuthGate } from './components/AuthGate'
+import NotFound from './pages/NotFound'
 import './styles/global.css'
 
 const BuilderProject = lazy(() => import('./pages/BuilderProject'))
@@ -35,6 +36,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/projects/greenapple" element={<AuthGate><GreenAppleProject /></AuthGate>} />
         <Route path="/projects/kindle" element={<AuthGate><KindleProject /></AuthGate>} />
         <Route path="/projects/buyerfolio" element={<AuthGate><BuyerFolioProject /></AuthGate>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

@@ -40,40 +40,23 @@ export default function NutribitesProject() {
     <div className="nb-case" ref={pageRef}>
       <Navbar goToSection={goToSection} blendMode />
 
-      <section className="nb-hero-section">
-        <div className="nb-hero-grid">
-          <div className="nb-hero-left">
-            <p className="nb-eyebrow">NutriBites — Website Design</p>
-            <h1 className="nb-hero-title">
-              Designing a product-driven ecommerce experience for NutriBites.
-            </h1>
-            <p className="nb-subtitle">
-              Improving clarity, trust, and conversion through structured content and visual hierarchy.
-            </p>
-          </div>
-          <div className="nb-hero-right">
-            <div className="nb-meta-block">
-              <h6>Overview</h6>
-              <p>
-                NutriBites is a pet food brand focused on healthy and nutritious products.
-                This project explores how a product website can better communicate value,
-                build trust, and guide users toward purchase decisions.
-              </p>
+      <section className="nb-hero">
+        <div className="nb-hero-left">
+          <h1 className="nb-hero-title">NutriBites</h1>
+          <div className="nb-hero-meta-row">
+            <div className="nb-hero-meta-item">
+              <span className="nb-meta-label">Region</span>
+              <span className="nb-meta-value">USA</span>
             </div>
-            <div className="nb-meta-block">
-              <h6>Role</h6>
-              <p>Lead UX/UI Designer &amp; Researcher, Individual Contributor</p>
-            </div>
-            <div className="nb-meta-block">
-              <h6>Time</h6>
-              <p>Nov 2021 – Jan 2022</p>
+            <div className="nb-hero-meta-item">
+              <span className="nb-meta-label">Year</span>
+              <span className="nb-meta-value">2021 – 2022</span>
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="nb-cover-section nb-reveal">
-        <img src={`${B}images/covers/nutribites.png`} alt="NutriBites Cover" className="nb-cover-img" />
+        <div className="nb-hero-right">
+          <img src={`${B}images/nutribites/hero-mockup.png`} alt="NutriBites website mockup" className="nb-hero-mockup" />
+        </div>
       </section>
 
       <section className="nb-section nb-reveal">
