@@ -45,17 +45,29 @@ export default function NutribitesProject() {
           <h1 className="nb-hero-title">NutriBites</h1>
           <div className="nb-hero-meta-row">
             <div className="nb-hero-meta-item">
-              <span className="nb-meta-label">Region</span>
-              <span className="nb-meta-value">USA</span>
+              <span className="nb-meta-label">Role</span>
+              <span className="nb-meta-value">Lead UX/UI Designer & Researcher, Individual Contributor</span>
             </div>
             <div className="nb-hero-meta-item">
-              <span className="nb-meta-label">Year</span>
-              <span className="nb-meta-value">2021 – 2022</span>
+              <span className="nb-meta-label">Timeline</span>
+              <span className="nb-meta-value">Nov 2021 - Jan 2022</span>
             </div>
           </div>
         </div>
         <div className="nb-hero-right">
-          <img src={`${B}images/nutribites/hero-mockup.png`} alt="NutriBites website mockup" className="nb-hero-mockup" />
+          <img src={`${B}images/nutribites/hero-mockup.png`} alt="NutriBites homepage mockup" className="nb-hero-mockup" />
+        </div>
+      </section>
+
+      <section className="nb-section nb-reveal">
+        <div className="nb-section-header">
+          <h2>Overview</h2>
+        </div>
+        <div className="nb-section-body">
+          <ul className="nb-problem-list">
+            <p>NutriBites is a pet food brand focused on healthy and nutritious products. This project explores how a product website can better communicate value, build trust, and guide users toward purchase decisions.</p>
+          
+          </ul>
         </div>
       </section>
 
