@@ -4,6 +4,7 @@ export interface Project {
   subtitle: string
   thumbnail: string
   detailPath?: string
+  externalUrl?: string
   comingSoon?: boolean
   passwordProtected?: boolean
 }
@@ -63,12 +64,13 @@ export const projects: Project[] = [
     title: 'Huagen Culture Center',
     subtitle: 'Brand System and Website Design For a Cultural Organization',
     thumbnail: 'images/covers/huagen.png',
+    passwordProtected: true,
   },
   {
     id: 'velvety',
     title: 'Velvety Design',
     subtitle: 'Website Design For a Creative Design Studio',
     thumbnail: 'images/covers/velvety.png',
-    comingSoon: true,
+    externalUrl: 'https://velvetydesign.com/',
   },
 ]

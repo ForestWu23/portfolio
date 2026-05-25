@@ -1,8 +1,7 @@
-import { StrictMode, lazy } from 'react'
+import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import App from './App'
-import { AuthGate } from './components/AuthGate'
 import NotFound from './pages/NotFound'
 import './styles/global.css'
 
@@ -26,18 +25,20 @@ const BuyerFolioProject = lazy(() => import('./pages/BuyerFolioProject'))
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/projects" element={<Navigate to="/" state={{ targetSection: 2 }} replace />} />
-        <Route path="/about" element={<Navigate to="/" state={{ targetSection: 3 }} replace />} />
-        <Route path="/contact" element={<Navigate to="/" state={{ targetSection: 4 }} replace />} />
-        <Route path="/projects/builder" element={<AuthGate><BuilderProject /></AuthGate>} />
-        <Route path="/projects/nutribites" element={<AuthGate><NutribitesProject /></AuthGate>} />
-        <Route path="/projects/greenapple" element={<AuthGate><GreenAppleProject /></AuthGate>} />
-        <Route path="/projects/kindle" element={<AuthGate><KindleProject /></AuthGate>} />
-        <Route path="/projects/buyerfolio" element={<AuthGate><BuyerFolioProject /></AuthGate>} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/projects" element={<Navigate to="/" state={{ targetSection: 2 }} replace />} />
+          <Route path="/about" element={<Navigate to="/" state={{ targetSection: 3 }} replace />} />
+          <Route path="/contact" element={<Navigate to="/" state={{ targetSection: 4 }} replace />} />
+          <Route path="/projects/builder" element={<BuilderProject />} />
+          <Route path="/projects/nutribites" element={<NutribitesProject />} />
+          <Route path="/projects/greenapple" element={<GreenAppleProject />} />
+          <Route path="/projects/kindle" element={<KindleProject />} />
+          <Route path="/projects/buyerfolio" element={<BuyerFolioProject />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   </StrictMode>,
 )

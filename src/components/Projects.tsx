@@ -2,7 +2,6 @@ import { useRef, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { projects, Project } from '../data/projects'
-import { checkAuth } from './AuthGate'
 import '../styles/Projects.css'
 
 const TILT_MAX = 4
@@ -154,16 +153,14 @@ function ProjectCard({
     if (project.comingSoon) return
     if (project.passwordProtected) {
       onProtectedClick(project)
+    } else if (project.externalUrl) {
+      window.open(project.externalUrl, '_blank', 'noopener,noreferrer')
     } else if (project.detailPath) {
-      if (checkAuth()) {
-        navigate(project.detailPath)
-      } else {
-        onProtectedClick(project)
-      }
+      navigate(project.detailPath)
     }
   }, [project, navigate, onProtectedClick])
 
-  const showLock = project.passwordProtected || project.detailPath
+  const showLock = project.passwordProtected
 
   return (
     <motion.div
