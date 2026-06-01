@@ -1,3 +1,4 @@
+import { useState, useCallback } from 'react'
 import '../styles/Navbar.css'
 
 const navLinks = [
@@ -13,32 +14,64 @@ interface NavbarProps {
 }
 
 export default function Navbar({ currentIndex = 0, goToSection, blendMode }: NavbarProps) {
-  const isDark = blendMode || (currentIndex >= 1 && currentIndex <= 2) || currentIndex === 4
+  const [open, setOpen] = useState(false)
+
+  // sections 1, 2, 4 have dark backgrounds; project pages (blendMode) are also dark
+  const onDark = blendMode || currentIndex === 1 || currentIndex === 2 || currentIndex === 4
+
+  const handleNav = useCallback(
+    (section: number) => {
+      goToSection(section)
+      setOpen(false)
+    },
+    [goToSection],
+  )
 
   return (
-    <nav className={`navbar ${isDark ? 'navbar-dark' : ''} ${blendMode ? 'navbar-blend' : ''}`}>
-      <a
-        className="navbar-logo"
-        href="#"
-        onClick={(e) => {
-          e.preventDefault()
-          goToSection(0)
-        }}
+    <div className="notch-root">
+      <div
+        className={`notch-pill${open ? ' notch-open' : ''}${onDark ? ' notch-light' : ''}`}
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
       >
-        Sihang Yang
-      </a>
+        {/* Collapsed: arch indicator */}
+        <div className="notch-indicator">
+          <span />
+          <span />
+          <span />
+        </div>
 
-      <div className="navbar-links">
-        {navLinks.map((link) => (
-          <button
-            key={link.section}
-            className="navbar-link"
-            onClick={() => goToSection(link.section)}
-          >
-            {link.label}
+        {/* Expanded: full-width horizontal banner */}
+        <div className="notch-banner">
+          {/* Left */}
+          <button className="notch-brand" onClick={() => handleNav(0)}>
+            Sihang Yang
           </button>
-        ))}
+
+          <div className="notch-sep notch-sep-left" />
+
+          {/* Center — always exactly centered */}
+          <nav className="notch-nav">
+            {navLinks.map((link) => (
+              <button
+                key={link.section}
+                className="notch-navlink"
+                onClick={() => handleNav(link.section)}
+              >
+                {link.label}
+              </button>
+            ))}
+          </nav>
+
+          <div className="notch-sep notch-sep-right" />
+
+          {/* Right */}
+          <div className="notch-right">
+            <span className="notch-avail-dot" />
+            <span className="notch-role">Product Designer</span>
+          </div>
+        </div>
       </div>
-    </nav>
+    </div>
   )
 }
