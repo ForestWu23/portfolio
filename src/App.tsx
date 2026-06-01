@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Highlights from './components/Highlights'
+import GameSlide from './components/GameSlide'
 import Projects from './components/Projects'
 import About from './components/About'
 import Footer from './components/Footer'
@@ -11,6 +12,7 @@ import './styles/NavDots.css'
 const SECTIONS = [
   { id: 'hero', label: '' },
   { id: 'highlights', label: 'Highlights' },
+  { id: 'game', label: 'Skills' },
   { id: 'work', label: 'Portfolio' },
   { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' },
@@ -137,6 +139,8 @@ export default function App() {
     }
 
     const onKeyDown = (e: KeyboardEvent) => {
+      // game slide handles its own ArrowUp / Space for jumping
+      if (currentIndex === 2) return
       if (e.key === 'ArrowDown' || e.key === 'PageDown') {
         e.preventDefault()
         goToSection(currentIndex + 1)
@@ -163,7 +167,7 @@ export default function App() {
     slidesRef.current[index] = el
   }
 
-  const isDarkDots = currentIndex >= 1 && currentIndex <= 2
+  const isDarkDots = currentIndex >= 1 && currentIndex <= 3
 
   return (
     <div className="app-wrapper">
@@ -176,12 +180,15 @@ export default function App() {
           <Highlights isActive={currentIndex === 1} />
         </div>
         <div className="slide" ref={setSlideRef(2)}>
-          <Projects />
+          <GameSlide isActive={currentIndex === 2} />
         </div>
         <div className="slide" ref={setSlideRef(3)}>
-          <About isActive={currentIndex === 3} />
+          <Projects />
         </div>
         <div className="slide" ref={setSlideRef(4)}>
+          <About isActive={currentIndex === 4} />
+        </div>
+        <div className="slide" ref={setSlideRef(5)}>
           <Footer />
         </div>
       </div>
