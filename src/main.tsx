@@ -6,6 +6,7 @@ import NotFound from './pages/NotFound'
 import './styles/global.css'
 
 const BuilderProject = lazy(() => import('./pages/BuilderProject'))
+const EastsidePage = lazy(() => import('./pages/EastsidePage'))
 const NutribitesProject = lazy(() => import('./pages/NutribitesProject'))
 const GreenAppleProject = lazy(() => import('./pages/GreenAppleProject'))
 const KindleProject = lazy(() => import('./pages/KindleProject'))
@@ -32,6 +33,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/about" element={<Navigate to="/" state={{ targetSection: 3 }} replace />} />
           <Route path="/contact" element={<Navigate to="/" state={{ targetSection: 4 }} replace />} />
           <Route path="/projects/builder" element={<BuilderProject />} />
+          <Route path="/random/eastside" element={<EastsidePage />} />
           <Route path="/projects/nutribites" element={<NutribitesProject />} />
           <Route path="/projects/greenapple" element={<GreenAppleProject />} />
           <Route path="/projects/kindle" element={<KindleProject />} />
